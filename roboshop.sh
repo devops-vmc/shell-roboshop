@@ -21,17 +21,20 @@ for instance_name_tag in $@; do
                 --query 'Reservations[].Instances[].PublicIpAddress' \
                 --output text
         )
+        echo "IP Public Address: $IP"
+
         #RECORD_NAME="$DOMAIN_NAME" # daws88s.online
     else
-        IP=$(
+        IP= $(
             aws ec2 describe-instances \
                 --instance-ids $INSTANCE_ID \
                 --query 'Reservations[].Instances[].PrivateIpAddress' \
                 --output text
         )
+        echo "IP Private Address: $IP"
     #RECORD_NAME="$instance.$DOMAIN_NAME" # mongodb.daws88s.online
     fi
 
-    echo "IP Address: $IP"
+    # echo "IP Address: $IP"
 
 done
